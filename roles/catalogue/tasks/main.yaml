@@ -1,0 +1,46 @@
+  - name: app_setup # we created a directory as common, there we wrttien playbook for app-setup.
+    include_role:
+      name: common
+      tasks_from: app-setup  
+  
+  - name: nodejs_setup
+    include_role: #we are calling that playbook by using include role
+      name: common
+      tasks_from: nodejs-setup
+
+  - name: copying mongoRepo
+    ansible.builtin.copy: #it will take repo file fromthe file directory
+      src:  mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
+
+  - name: installing mongodb clinet
+    ansible.builtin.package:
+      name: mongodb-mongosh
+      state: installed
+
+  - name: check whether products loaded or not
+    ansible.builtin.command:  mongosh --host mongodb.devsecopstrainee.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+    register: catalogue_output
+  
+  - name: printing catalogue_output
+    ansible.builtin.debug:
+      msg: "{{ catalogue_output }}"
+
+  - name: load products
+    ansible.builtin.shell: mongosh --host mongodb.devsecopstrainee.site < /app/db/master-data.js
+    when: catalogue_output.stdout | int < 0
+
+    # In linux server the result of stdout will be string, when is unable to compare so we use filter and given integer
+
+
+  - name: systemdSetup
+    include_role:
+      name: common
+      tasks_from: systemd-setup
+
+  - name: Deployment
+    tags: #While using tags imprt role is preferble compared to imclude role,
+    - deployment #as include role does not effect to entire tasks when we are using tags.
+    import_role:
+      name: common
+      tasks_from: deployment

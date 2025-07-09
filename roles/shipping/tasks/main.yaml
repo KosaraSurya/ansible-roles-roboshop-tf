@@ -1,0 +1,29 @@
+  - name: app_setup
+    include_role:
+      name: common
+      tasks_from: app-setup
+
+  - name: maven_setup
+    include_role:
+      name: common
+      tasks_from: maven-setup
+
+  - name: import data
+    tags: # tags are used to run particualr block of code, while running the script in ansible server we have to give -t tagName
+    - import
+    community.mysql.mysql_db:
+      name: all
+      login_user: root
+      login_password: RoboShop@1
+      login_host: mysql.devsecopstrainee.site
+      state: import
+      target: "{{ item }}"
+    loop:
+    - /app/db/schema.sql
+    - /app/db/app-user.sql
+    - /app/db/master-data.sql
+
+  - name: systemdSetup
+    include_role: 
+      name: common
+      tasks_from: systemd-setup

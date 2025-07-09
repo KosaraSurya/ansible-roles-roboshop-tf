@@ -1,0 +1,25 @@
+  - name: installing maven and mysql
+    ansible.builtin.dnf:
+      name: "{{ item }}"
+      state: installed
+    loop:
+    - maven
+    - mysql
+
+  - name: installing PyMySQL and cryptography
+    ansible.builtin.pip:
+      name: "{{ item }}"
+      executable: pip3.9  #pip3 used to install python dependecies( for ansible because ansible developed in the basis of python)
+    loop:
+    - PyMySQL # PyMySQLn is used to connect mysql clinet
+    - cryptography # cryptography used to password configuration
+
+  - name: installing maven dependencies
+    ansible.builtin.command: mvn clean package
+    args:
+      chdir: /app #it will install the maven dependecies in app directory and it will come-out of the directory
+
+  - name: Rename the jar file
+    ansible.builtin.command:  mv target/shipping-1.0.jar shipping.jar
+    args:
+      chdir: /app

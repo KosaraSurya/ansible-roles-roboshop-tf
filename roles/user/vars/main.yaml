@@ -1,0 +1,5 @@
+MONGODB_HOST: mongodb.devsecopstrainee.site
+REDIS_HOST: redis.devsecopstrainee.site
+
+#This value will be added to user.service.jinja2 template
+#Form dev to qa, qa to produuction the hostanme will changes so theat we will taken as variables 

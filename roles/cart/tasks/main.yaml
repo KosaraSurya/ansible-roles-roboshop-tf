@@ -1,0 +1,14 @@
+  - name: app_setup # we created a directory as common, there we wrttien playbook for app-setup.
+    include_role:
+      name: common
+      tasks_from: app-setup  
+  
+  - name: nodejs_setup
+    include_role: #we are calling that playbook by using include role
+      name: common
+      tasks_from: nodejs-setup
+
+  - name: systemd-setup
+    include_role:
+      name: common
+      tasks_from: systemd-setup

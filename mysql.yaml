@@ -1,0 +1,7 @@
+- name: configuration of "{{ component}}"
+  become: yes
+  hosts: "{{ component }}"
+  vars_files:
+  - vault/mysql.yaml #the code as same as main.yaml but here we are performing vault concept we for that we taking variables which are not having for remaing applications.
+  roles:
+  - "{{ component}}"

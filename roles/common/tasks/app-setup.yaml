@@ -1,0 +1,28 @@
+  - name: crating directory
+    ansible.builtin.file:
+      name: /app
+      state:  directory
+
+  - name:  creating system user
+    ansible.builtin.user:
+      name: roboshop
+      shell:  /sbin/nologin
+      system: true
+      home: /app
+
+  - name: downloading catalogue service
+    ansible.builtin.get_url:
+      url:  https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-v3.zip
+      dest: /tmp/{{ component }}.zip
+
+      # when we "{{ component }}" we are not able to download the service
+
+
+  # this module thinks file exist on ansible control server,But needs to extract on to remote machine so
+  # remote_src: yes means files already exist in catalogue server
+
+  - name: extracting the service
+    ansible.builtin.unarchive:
+      src:  /tmp/{{ component }}.zip
+      dest: /app
+      remote_src: yes
