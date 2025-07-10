@@ -1,3 +1,4 @@
+env: dev
 MONGODB_HOST: mongodb-{{ env }}.devsecopstrainee.site
 
 #This value will be added to catalogue.service.jinja2 template
