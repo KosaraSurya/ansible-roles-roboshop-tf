@@ -19,7 +19,7 @@
       state: installed
 
   - name: check whether products loaded or not
-    ansible.builtin.command:  mongosh --host mongodb.devsecopstrainee.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+    ansible.builtin.command:  mongosh --host mongodb-dev.devsecopstrainee.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
     register: catalogue_output
   
   - name: printing catalogue_output
@@ -27,7 +27,7 @@
       msg: "{{ catalogue_output }}"
 
   - name: load products
-    ansible.builtin.shell: mongosh --host mongodb.devsecopstrainee.site < /app/db/master-data.js
+    ansible.builtin.shell: mongosh --host mongodb-dev.devsecopstrainee.site < /app/db/master-data.js
     when: catalogue_output.stdout | int < 0
 
     # In linux server the result of stdout will be string, when is unable to compare so we use filter and given integer
