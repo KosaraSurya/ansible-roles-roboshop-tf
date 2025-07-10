@@ -1,8 +1,5 @@
-- name: Set MongoDB hostname
-  set_fact:
 
-  env: dev
-  MONGODB_HOST: mongodb-{{ env }}.devsecopstrainee.site
+  MONGODB_HOST: mongodb-dev.devsecopstrainee.site
 
 #This value will be added to catalogue.service.jinja2 template
 #Form dev to qa, qa to produuction the hostanme will changes so theat we will taken as variables
