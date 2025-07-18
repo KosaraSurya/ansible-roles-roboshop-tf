@@ -1,5 +1,5 @@
-CATALOGUE_HOST: catalogue.devsecopstrainee.site
-USER_HOST: user.devsecopstrainee.site
-CART_HOST: cart.devsecopstrainee.site
-SHIPPING_HOST: shipping.devsecopstrainee.site
-PAYMENT_HOST: payment.devsecopstrainee.site
+CATALOGUE_HOST: catalogue-{{ env }}.devsecopstrainee.site
+USER_HOST: user-{{ env }}.devsecopstrainee.site
+CART_HOST: cart-{{ env }}.devsecopstrainee.site
+SHIPPING_HOST: shipping-{{ env }}.devsecopstrainee.site
+PAYMENT_HOST: payment-{{ env }}.devsecopstrainee.site

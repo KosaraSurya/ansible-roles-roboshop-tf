@@ -1,2 +1,2 @@
-REDIS_HOST: redis.devsecopstrainee.site
-CATALOGUE_HOST: catalogue.devsecopstrainee.site
+REDIS_HOST: redis-{{ env }}.devsecopstrainee.site
+CATALOGUE_HOST: catalogue-{{ env }}.devsecopstrainee.site

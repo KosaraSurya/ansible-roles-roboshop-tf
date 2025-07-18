@@ -1,2 +1,2 @@
-CART_HOST: cart.devsecopstrainee.site
-MYSQL_HOST : mysql.devsecopstrainee.site
+CART_HOST: cart-{{ env }}.devsecopstrainee.site
+MYSQL_HOST : mysql-{{ env }}.devsecopstrainee.site
