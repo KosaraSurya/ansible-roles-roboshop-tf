@@ -1,10 +1,10 @@
-- name: configuration of "{{ component}}"
+- name: configuration of "{{component}}"
   become: yes
   #hosts: "{{ component }}"
   hosts: localhost # Here we given local host for roboshop-infra-dev/40-databases/main.tf
   connection: local # for ansible roles we have to use hosts: "{{ component }}"
   roles:
-  - "{{ component}}"
+  - "{{component}}"
 
   #Here we are giving component as a variabe and we'll pass the value at run time as 
   #ansible-playbook -i inventory.ini -e component=mongodb main.yaml 
